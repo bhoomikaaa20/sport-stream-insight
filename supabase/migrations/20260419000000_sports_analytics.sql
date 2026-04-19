@@ -153,4 +153,4 @@ create policy "Admins manage stats" on public.player_stats for all
 
 -- Realtime
 alter publication supabase_realtime add table public.matches;
-alter publication secret_realtime add table public.player_stats;
+alter publication supabase_realtime add table public.player_stats;
