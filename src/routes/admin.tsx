@@ -90,7 +90,7 @@ function AdminPage() {
   );
 }
 
-function ClaimAdminButton({ userId }: { userId: string }) {
+function ClaimAdminButton({ userId: _userId }: { userId: string }) {
   const [busy, setBusy] = useState(false);
   async function claim() {
     setBusy(true);
