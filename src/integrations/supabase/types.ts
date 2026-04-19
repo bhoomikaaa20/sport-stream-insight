@@ -14,16 +14,219 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      matches: {
+        Row: {
+          batting_team: string | null
+          created_at: string
+          current_innings: number
+          format: string
+          id: string
+          result_summary: string | null
+          scheduled_at: string | null
+          status: string
+          team_a: string
+          team_a_overs: number
+          team_a_runs: number
+          team_a_short: string
+          team_a_wickets: number
+          team_b: string
+          team_b_overs: number
+          team_b_runs: number
+          team_b_short: string
+          team_b_wickets: number
+          updated_at: string
+          venue: string | null
+        }
+        Insert: {
+          batting_team?: string | null
+          created_at?: string
+          current_innings?: number
+          format?: string
+          id?: string
+          result_summary?: string | null
+          scheduled_at?: string | null
+          status?: string
+          team_a: string
+          team_a_overs?: number
+          team_a_runs?: number
+          team_a_short: string
+          team_a_wickets?: number
+          team_b: string
+          team_b_overs?: number
+          team_b_runs?: number
+          team_b_short: string
+          team_b_wickets?: number
+          updated_at?: string
+          venue?: string | null
+        }
+        Update: {
+          batting_team?: string | null
+          created_at?: string
+          current_innings?: number
+          format?: string
+          id?: string
+          result_summary?: string | null
+          scheduled_at?: string | null
+          status?: string
+          team_a?: string
+          team_a_overs?: number
+          team_a_runs?: number
+          team_a_short?: string
+          team_a_wickets?: number
+          team_b?: string
+          team_b_overs?: number
+          team_b_runs?: number
+          team_b_short?: string
+          team_b_wickets?: number
+          updated_at?: string
+          venue?: string | null
+        }
+        Relationships: []
+      }
+      player_stats: {
+        Row: {
+          balls_faced: number
+          created_at: string
+          fours: number
+          id: string
+          is_out: boolean
+          is_striker: boolean
+          match_id: string
+          overs_bowled: number
+          player_id: string
+          runs: number
+          runs_conceded: number
+          sixes: number
+          updated_at: string
+          wickets: number
+        }
+        Insert: {
+          balls_faced?: number
+          created_at?: string
+          fours?: number
+          id?: string
+          is_out?: boolean
+          is_striker?: boolean
+          match_id: string
+          overs_bowled?: number
+          player_id: string
+          runs?: number
+          runs_conceded?: number
+          sixes?: number
+          updated_at?: string
+          wickets?: number
+        }
+        Update: {
+          balls_faced?: number
+          created_at?: string
+          fours?: number
+          id?: string
+          is_out?: boolean
+          is_striker?: boolean
+          match_id?: string
+          overs_bowled?: number
+          player_id?: string
+          runs?: number
+          runs_conceded?: number
+          sixes?: number
+          updated_at?: string
+          wickets?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "player_stats_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "matches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "player_stats_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "players"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      players: {
+        Row: {
+          created_at: string
+          id: string
+          jersey_number: number | null
+          name: string
+          role: string
+          team: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          jersey_number?: number | null
+          name: string
+          role?: string
+          team: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          jersey_number?: number | null
+          name?: string
+          role?: string
+          team?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +353,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
