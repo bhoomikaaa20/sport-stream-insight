@@ -94,17 +94,15 @@ function ClaimAdminButton({ userId }: { userId: string }) {
   const [busy, setBusy] = useState(false);
   async function claim() {
     setBusy(true);
-    // Allowed: user_roles has policy "Admins manage roles" — but bootstrap relies on
-    // there being no admin yet. We use a security-definer-style insert via RPC isn't
-    // set up; for a demo, allow self-grant if no admin exists. We do this by trying
-    // to insert; if an admin exists, RLS will reject and we tell the user.
-    const { error } = await supabase.from("user_roles").insert({ user_id: userId, role: "admin" });
+    const { data, error } = await supabase.rpc("claim_first_admin");
     setBusy(false);
     if (error) {
-      toast.error("Couldn't grant admin. An admin already exists — ask them to add you.");
-    } else {
+      toast.error(error.message);
+    } else if (data) {
       toast.success("Admin granted! Refreshing…");
       setTimeout(() => window.location.reload(), 800);
+    } else {
+      toast.error("An admin already exists — ask them to grant you access.");
     }
   }
   return (
