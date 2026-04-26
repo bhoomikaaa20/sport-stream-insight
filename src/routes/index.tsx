@@ -129,6 +129,12 @@ function HomePage() {
         )}
       </Section>
 
+      {/* Features grid */}
+      <FeaturesSection />
+
+      {/* How it works */}
+      <HowItWorks />
+
       {/* Upcoming */}
       {upcoming.length > 0 && (
         <Section title="Upcoming">
