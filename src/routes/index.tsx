@@ -98,6 +98,9 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Live ticker */}
+      <TickerStrip />
+
       {/* Live now */}
       <Section
         title="Live now"
