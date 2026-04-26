@@ -2,7 +2,23 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMatches } from "@/lib/realtime";
 import { MatchCard } from "@/components/MatchCard";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Radio, BarChart3, Users, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  Radio,
+  BarChart3,
+  Users,
+  Zap,
+  Trophy,
+  Activity,
+  TrendingUp,
+  Target,
+  Gauge,
+  Eye,
+  Sparkles,
+  Clock,
+  ShieldCheck,
+  Quote,
+} from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
